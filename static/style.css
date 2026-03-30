@@ -128,16 +128,6 @@ body.mode-break {
 .floating-logo {
     display: none;
 }
-body.mode-break .floating-logo {
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 30;
-    pointer-events: none;
-}
 
 /* ===== App Container ===== */
 .app-container {
@@ -649,7 +639,7 @@ body.mode-break .quran-section {
     grid-column: 2;
     grid-row: 1;
     min-width: 0;
-    padding: 0.9rem 4rem 0.9rem;
+    padding: 0.9rem 1rem 0.9rem;
     border-top: none;
     background: transparent;
 }
@@ -667,12 +657,12 @@ body.mode-break.reader-focus .quran-section {
     min-height: 0;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(180deg, #fffefb 0%, #f8f4ea 100%);
-    border: 1px solid rgba(180, 135, 71, 0.22);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(244, 252, 248, 0.94) 100%);
+    border: 1px solid var(--surface-border);
     border-radius: 30px;
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.95),
-        0 18px 48px rgba(95, 76, 39, 0.08);
+        0 18px 48px rgba(6, 78, 59, 0.08);
     padding: 0.85rem;
 }
 
@@ -740,28 +730,28 @@ body.mode-break .ayah-number {
 
 /* ===== Mushaf Page Mode ===== */
 .mushaf-page-style {
-    background: #fefcf3 !important;
-    color: #1a120b !important;
-    border: 2px solid #c9a96e;
-    border-radius: 4px !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--surface-border);
+    border-radius: 20px !important;
     padding: 2.5rem 2rem !important;
     box-shadow: 
-        inset 0 0 30px rgba(180, 130, 60, 0.08),
-        0 8px 30px rgba(0, 0, 0, 0.3);
+        inset 0 0 30px rgba(16, 185, 129, 0.04),
+        0 8px 30px rgba(6, 78, 59, 0.12);
     max-width: 650px;
     margin: 0 auto;
 }
 .mushaf-page-style .mushaf-layout {
     line-height: 2.2;
-    color: #1a120b;
+    color: var(--text-primary);
 }
 .mushaf-page-style .ayah-text {
-    color: #1a120b !important;
+    color: var(--text-primary) !important;
 }
 .mushaf-page-style .ayah-number {
-    border-color: #b45309 !important;
-    color: #b45309 !important;
-    background: transparent !important;
+    border-color: var(--break-accent) !important;
+    color: var(--break-accent) !important;
+    background: rgba(16, 185, 129, 0.06) !important;
     width: 28px;
     height: 28px;
     font-size: 0.7rem;
@@ -778,13 +768,14 @@ body.mode-break .ayah-number {
     margin-top: 1rem;
 }
 body.mode-break .quran-nav {
-    position: absolute;
-    inset: 0;
-    margin: 0;
-    padding: 0;
+    position: static;
+    inset: auto;
+    margin-top: 0.7rem;
+    padding: 0.25rem 0 0;
     border-top: none;
-    pointer-events: none;
-    z-index: 5;
+    pointer-events: auto;
+    z-index: auto;
+    justify-content: space-between;
 }
 .quran-nav .btn {
     font-size: 0.95rem;
@@ -800,8 +791,7 @@ body.mode-break .quran-nav {
     background: rgba(255, 255, 255, 0.72);
 }
 body.mode-break .nav-btn {
-    position: absolute;
-    top: 50%;
+    position: static;
     width: 3.4rem;
     height: 3.4rem;
     min-width: 0;
@@ -810,13 +800,14 @@ body.mode-break .nav-btn {
     background: rgba(255, 255, 255, 0.92);
     box-shadow: 0 14px 32px rgba(16, 24, 40, 0.12);
     pointer-events: auto;
-    transform: translateY(-50%);
+    transform: none;
+    border: 1px solid var(--surface-border);
 }
 body.mode-break #prev-btn {
-    right: 0.75rem;
+    right: auto;
 }
 body.mode-break #next-btn {
-    left: 0.75rem;
+    left: auto;
 }
 body.mode-break .nav-btn span:not(.nav-arrow) {
     display: none;
@@ -1073,9 +1064,6 @@ body.mode-break .info-badge {
         padding: 1.2rem 1.15rem;
     }
     body.mode-break .nav-btn {
-        top: auto;
-        bottom: 1rem;
-        transform: none;
         width: 3rem;
         height: 3rem;
     }
@@ -1105,11 +1093,5 @@ body.mode-break .info-badge {
     }
     body.mode-break .quran-section {
         padding-inline: 0.8rem;
-    }
-    body.mode-break #prev-btn {
-        right: 0.45rem;
-    }
-    body.mode-break #next-btn {
-        left: 0.45rem;
     }
 }
