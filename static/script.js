@@ -1,7 +1,7 @@
 // ===== Configuration =====
 const THEMES = new Set(['mint', 'lavender', 'sky', 'rose', 'sand']);
 const READING_MODES = new Set(['rub', 'challenge', 'page']);
-const FONT_SIZES = new Set(['1.6rem', '2rem', '2.6rem', '3.2rem']);
+const FONT_SIZES = new Set(['1.2rem', '1.6rem', '2rem', '2.6rem', '3.2rem']);
 
 function readStoredJson(key) {
     try {
@@ -107,6 +107,8 @@ const readerSessionGoal = $('reader-session-goal');
 const readerLastPosition = $('reader-last-position');
 const readerFocusBtn = $('reader-focus-btn');
 const readerFocusLabel = $('reader-focus-label');
+const readerFocusControl = $('reader-focus-control');
+const readerFocusFab = $('reader-focus-fab');
 const timerSummary = document.querySelector('.timer-summary');
 const CIRCUMFERENCE = 2 * Math.PI * 90; // 565.48
 let alarmPrimed = false;
@@ -406,10 +408,15 @@ function setReaderFocus(enabled) {
     readerFocusEnabled = Boolean(enabled) && !isStudyMode;
     body.classList.toggle('reader-focus', readerFocusEnabled);
 
-    if (!readerFocusBtn) return;
+    const focusButtons = [readerFocusBtn, readerFocusControl, readerFocusFab].filter(Boolean);
+    focusButtons.forEach(button => {
+        button.setAttribute('aria-pressed', readerFocusEnabled ? 'true' : 'false');
+        button.title = readerFocusEnabled ? 'إظهار الأدوات' : 'وضع التركيز';
+        if (button === readerFocusControl || button === readerFocusFab) {
+            button.textContent = readerFocusEnabled ? '⤡ إنهاء التركيز' : '⤢ تركيز';
+        }
+    });
 
-    readerFocusBtn.setAttribute('aria-pressed', readerFocusEnabled ? 'true' : 'false');
-    readerFocusBtn.title = readerFocusEnabled ? 'إظهار الأدوات' : 'وضع التركيز';
     if (readerFocusLabel) {
         readerFocusLabel.textContent = readerFocusEnabled ? 'إظهار الأدوات' : 'تركيز';
     }
@@ -418,14 +425,10 @@ function setReaderFocus(enabled) {
 function updateReadingTimerInteraction() {
     if (!timerSummary) return;
 
-    const canStartFromTimer = !isStudyMode && timerId === null;
-    timerSummary.classList.toggle('timer-start-ready', canStartFromTimer);
-    timerSummary.tabIndex = canStartFromTimer ? 0 : -1;
-    timerSummary.setAttribute('role', canStartFromTimer ? 'button' : 'group');
-    timerSummary.setAttribute(
-        'aria-label',
-        canStartFromTimer ? 'اضغط لبدء أو استكمال جلسة القراءة' : 'مؤقت جلسة القراءة'
-    );
+    timerSummary.classList.remove('timer-start-ready');
+    timerSummary.tabIndex = -1;
+    timerSummary.setAttribute('role', 'group');
+    timerSummary.setAttribute('aria-label', 'مؤقت جلسة القراءة');
 }
 
 // ===== Timer Functions =====
@@ -753,12 +756,6 @@ function resetTimer() {
     updateDisplay();
 }
 
-async function startReadingFromTimer() {
-    if (isStudyMode || timerId !== null) return;
-    await primeAlarmAudio();
-    startTimer();
-}
-
 // ===== Event Listeners =====
 
 // Settings
@@ -812,24 +809,13 @@ statsBtn.addEventListener('click', openStatsModal);
 closeStatsBtn.addEventListener('click', closeStatsModal);
 $('stats-overlay').addEventListener('click', closeStatsModal);
 
-if (readerFocusBtn) {
-    readerFocusBtn.addEventListener('click', () => {
+const focusToggleButtons = [readerFocusBtn, readerFocusControl, readerFocusFab].filter(Boolean);
+focusToggleButtons.forEach(button => {
+    button.addEventListener('click', () => {
         if (isStudyMode) return;
         setReaderFocus(!readerFocusEnabled);
     });
-}
-
-if (timerSummary) {
-    timerSummary.addEventListener('click', () => {
-        startReadingFromTimer();
-    });
-
-    timerSummary.addEventListener('keydown', event => {
-        if (event.key !== 'Enter' && event.key !== ' ') return;
-        event.preventDefault();
-        startReadingFromTimer();
-    });
-}
+});
 
 document.addEventListener('keydown', event => {
     const activeTag = event.target?.tagName;

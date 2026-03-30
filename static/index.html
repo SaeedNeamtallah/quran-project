@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20260330-12">
+    <link rel="stylesheet" href="style.css?v=20260330-13">
 </head>
 <body class="mode-study">
 
@@ -103,26 +103,28 @@
                 <button id="pause-btn" class="btn btn-primary hidden">⏸ إيقاف</button>
                 <button id="reset-btn" class="btn btn-ghost">↻ إعادة</button>
                 <button id="skip-btn" class="btn btn-ghost">⏭ تخطي</button>
+                <button id="reader-focus-control" class="btn btn-ghost">⤢ تركيز</button>
             </div>
         </div>
 
         <!-- Quran Display Section -->
         <div id="quran-display" class="quran-section hidden">
+            <button id="reader-focus-fab" class="reader-focus-fab" type="button">⤢ تركيز</button>
             <div class="reader-stage">
                 <div class="loader hidden" id="quran-loader"></div>
                 <div class="reader-page-frame">
                     <div id="verses-container" class="verses-area">
                         <!-- Verses will be inserted here -->
                     </div>
-                    <div class="quran-nav">
-                        <button id="prev-btn" class="btn btn-ghost nav-btn"><span class="nav-arrow">→</span><span>السابق</span></button>
-                        <div class="info-badge">
-                            <span id="hizb-number">--</span>
-                            <small>استخدم السهمين للتنقل السريع</small>
-                        </div>
-                        <button id="next-btn" class="btn btn-ghost nav-btn"><span>التالي</span><span class="nav-arrow">←</span></button>
-                    </div>
                 </div>
+            </div>
+            <div class="quran-nav">
+                <button id="prev-btn" class="btn btn-ghost nav-btn"><span class="nav-arrow">→</span><span>السابق</span></button>
+                <div class="info-badge">
+                    <span id="hizb-number">--</span>
+                    <small>استخدم السهمين للتنقل السريع</small>
+                </div>
+                <button id="next-btn" class="btn btn-ghost nav-btn"><span>التالي</span><span class="nav-arrow">←</span></button>
             </div>
         </div>
 
@@ -149,6 +151,7 @@
                 <div class="setting-item">
                     <label for="font-size">حجم خط القرآن</label>
                     <select id="font-size">
+                        <option value="1.2rem">صغير جداً</option>
                         <option value="1.6rem">صغير</option>
                         <option value="2rem" selected>متوسط</option>
                         <option value="2.6rem">كبير</option>
@@ -228,6 +231,6 @@
     <!-- Audio -->
     <audio id="alarm-sound" src="alarm.m4a" preload="auto"></audio>
 
-    <script src="script.js?v=20260330-4"></script>
+    <script src="script.js?v=20260330-5"></script>
 </body>
 </html>
