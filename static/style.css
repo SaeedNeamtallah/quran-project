@@ -106,21 +106,21 @@ body.theme-sand {
 
 /* ===== Theme: Dark ===== */
 body.theme-dark {
-    --bg-study: radial-gradient(circle at top, #1a2233 0%, #0f1520 46%, #080c13 100%);
-    --bg-break: radial-gradient(circle at top, #1d2638 0%, #111824 46%, #090d15 100%);
+    --bg-study: radial-gradient(circle at top, #162728 0%, #0d1516 46%, #080c0d 100%);
+    --bg-break: radial-gradient(circle at top, #193032 0%, #0f1718 46%, #090d0e 100%);
     --text-primary: #edf4ff;
-    --text-secondary: #a7b7d6;
+    --text-secondary: #9ccfca;
     --surface: rgba(10, 14, 22, 0.88);
-    --surface-border: rgba(129, 164, 255, 0.16);
-    --accent: #7aa2ff;
-    --accent-glow: rgba(122, 162, 255, 0.22);
-    --break-accent: #9bc2ff;
-    --break-accent-glow: rgba(155, 194, 255, 0.22);
+    --surface-border: rgba(65, 199, 187, 0.16);
+    --accent: #41c7bb;
+    --accent-glow: rgba(65, 199, 187, 0.22);
+    --break-accent: #74e1d7;
+    --break-accent-glow: rgba(116, 225, 215, 0.22);
     --modal-bg: #0f1420;
-    --modal-border: rgba(129, 164, 255, 0.16);
-    --modal-label: #dbe7ff;
+    --modal-border: rgba(65, 199, 187, 0.16);
+    --modal-label: #d7f4f0;
     --modal-input-bg: rgba(17, 23, 35, 0.94);
-    --modal-input-border: rgba(129, 164, 255, 0.14);
+    --modal-input-border: rgba(65, 199, 187, 0.14);
     --modal-input-color: #edf4ff;
 }
 
@@ -146,7 +146,7 @@ body.mode-break {
 }
 body.theme-dark.mode-break {
     background:
-        radial-gradient(circle at top, rgba(28, 38, 58, 0.98) 0%, rgba(12, 18, 28, 0.98) 52%, rgba(7, 10, 16, 0.98) 100%);
+        radial-gradient(circle at top, rgba(24, 45, 44, 0.98) 0%, rgba(12, 19, 19, 0.98) 52%, rgba(7, 10, 10, 0.98) 100%);
 }
 
 .floating-logo {
@@ -191,7 +191,7 @@ body.theme-dark .app-container {
 }
 body.theme-dark.mode-break .app-container {
     background: rgba(8, 12, 20, 0.82);
-    border-color: rgba(129, 164, 255, 0.08);
+    border-color: rgba(65, 199, 187, 0.08);
 }
 body.mode-break.reader-focus .app-container {
     grid-template-columns: 1fr;
@@ -464,7 +464,7 @@ body.mode-break .timer-section {
 }
 body.theme-dark.mode-break .timer-section {
     background: linear-gradient(180deg, rgba(12, 18, 29, 0.94), rgba(9, 13, 22, 0.98));
-    border-right-color: rgba(129, 164, 255, 0.08);
+    border-right-color: rgba(65, 199, 187, 0.08);
 }
 body.mode-break.reader-focus .timer-section {
     display: none;
@@ -497,12 +497,12 @@ body.mode-break .timer-summary {
 }
 body.theme-dark .timer-summary {
     background: rgba(18, 24, 36, 0.88);
-    border-color: rgba(129, 164, 255, 0.1);
+    border-color: rgba(65, 199, 187, 0.1);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 body.theme-dark.mode-break .timer-summary {
     background: rgba(18, 24, 36, 0.92);
-    border-color: rgba(129, 164, 255, 0.1);
+    border-color: rgba(65, 199, 187, 0.1);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 body.mode-break .reader-side-stats {
@@ -618,7 +618,7 @@ body.mode-break .reader-side-stats {
 }
 body.theme-dark .reader-side-item {
     background: rgba(18, 24, 36, 0.9);
-    border-color: rgba(129, 164, 255, 0.08);
+    border-color: rgba(65, 199, 187, 0.08);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 .reader-side-item span {
@@ -742,7 +742,7 @@ body.mode-break #skip-btn {
 body.theme-dark.mode-break #reader-focus-control,
 body.theme-dark.mode-break #skip-btn {
     background: rgba(18, 24, 36, 0.92);
-    border-color: rgba(129, 164, 255, 0.08);
+    border-color: rgba(65, 199, 187, 0.08);
 }
 body.mode-break #start-btn,
 body.mode-break #pause-btn {
@@ -754,7 +754,7 @@ body.mode-break #pause-btn {
 }
 body.theme-dark.mode-break #start-btn,
 body.theme-dark.mode-break #pause-btn {
-    box-shadow: 0 14px 28px rgba(122, 162, 255, 0.18);
+    box-shadow: 0 14px 28px rgba(65, 199, 187, 0.18);
 }
 body.mode-break #start-btn .btn-icon,
 body.mode-break #pause-btn .btn-icon {
@@ -773,7 +773,7 @@ body.theme-dark.mode-break .controls .btn .btn-icon {
 }
 body.theme-dark.mode-break #reader-focus-control .btn-icon,
 body.theme-dark.mode-break #skip-btn .btn-icon {
-    background: rgba(122, 162, 255, 0.12);
+    background: rgba(65, 199, 187, 0.12);
     color: var(--accent);
 }
 body.mode-break .controls .btn:hover {
@@ -825,7 +825,7 @@ body.theme-dark.mode-break .reader-font-title {
 }
 body.theme-dark .font-step-btn {
     background: rgba(18, 24, 36, 0.92);
-    border-color: rgba(129, 164, 255, 0.08);
+    border-color: rgba(65, 199, 187, 0.08);
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
 }
 .font-step-btn:hover:not(:disabled) {
@@ -849,7 +849,7 @@ body.theme-dark .font-step-btn {
 }
 body.theme-dark .font-size-display {
     background: rgba(18, 24, 36, 0.9);
-    border-color: rgba(129, 164, 255, 0.08);
+    border-color: rgba(65, 199, 187, 0.08);
 }
 
 .btn-ghost {
@@ -908,7 +908,7 @@ body.mode-break.reader-focus .quran-section {
 }
 body.theme-dark .reader-page-frame {
     background: linear-gradient(180deg, rgba(16, 21, 32, 0.98) 0%, rgba(11, 15, 24, 0.98) 100%);
-    border-color: rgba(129, 164, 255, 0.08);
+    border-color: rgba(65, 199, 187, 0.08);
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.03),
         0 18px 48px rgba(0, 0, 0, 0.28);
@@ -1046,9 +1046,9 @@ body.mode-break .ayah-number {
 }
 body.theme-dark .mushaf-page-style {
     background: rgba(14, 19, 29, 0.98) !important;
-    border-color: rgba(129, 164, 255, 0.08);
+    border-color: rgba(65, 199, 187, 0.08);
     box-shadow:
-        inset 0 0 26px rgba(122, 162, 255, 0.04),
+        inset 0 0 26px rgba(65, 199, 187, 0.04),
         0 8px 30px rgba(0, 0, 0, 0.28);
 }
 .mushaf-page-style .mushaf-layout {
@@ -1122,7 +1122,7 @@ body.mode-break .nav-btn {
 }
 body.theme-dark.mode-break .nav-btn {
     background: rgba(15, 21, 32, 0.64);
-    border-color: rgba(129, 164, 255, 0.06);
+    border-color: rgba(65, 199, 187, 0.06);
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 }
 body.mode-break .nav-arrow {
@@ -1340,18 +1340,18 @@ body.theme-dark .stat-card {
 }
 body.theme-dark .app-logo-mark {
     box-shadow:
-        0 10px 22px rgba(122, 162, 255, 0.18),
+        0 10px 22px rgba(65, 199, 187, 0.18),
         inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 body.theme-dark .reader-mode-pill {
-    background: rgba(122, 162, 255, 0.14);
+    background: rgba(65, 199, 187, 0.14);
 }
 body.theme-dark .reader-meta-chip {
-    border-color: rgba(129, 164, 255, 0.14);
+    border-color: rgba(65, 199, 187, 0.14);
     background: rgba(18, 24, 36, 0.82);
 }
 body.theme-dark .reader-progress-track {
-    background: rgba(122, 162, 255, 0.12);
+    background: rgba(65, 199, 187, 0.12);
 }
 body.theme-dark .ayah-number,
 body.theme-dark.mode-break .ayah-number,
