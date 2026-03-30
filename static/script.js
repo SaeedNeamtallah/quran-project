@@ -411,7 +411,7 @@ function setReaderFocus(enabled) {
     focusButtons.forEach(button => {
         button.setAttribute('aria-pressed', readerFocusEnabled ? 'true' : 'false');
         button.title = readerFocusEnabled ? 'إظهار الأدوات' : 'وضع التركيز';
-        if (button === readerFocusControl || button === readerFocusFab) {
+        if (button === readerFocusControl) {
             button.textContent = readerFocusEnabled ? '⤡ إنهاء التركيز' : '⤢ تركيز';
         }
     });
