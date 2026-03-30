@@ -248,10 +248,12 @@ body.mode-break .reader-header-shell {
     flex-direction: column;
     gap: 0.18rem;
     min-width: 0;
-    padding: 0 0.15rem;
+    width: 100%;
+    padding: 0;
     border: none;
     background: transparent;
     box-shadow: none;
+    align-items: stretch;
 }
 .reader-title-row {
     display: flex;
@@ -260,10 +262,11 @@ body.mode-break .reader-header-shell {
     min-width: 0;
 }
 body.mode-break .reader-title-row {
+    width: 100%;
     flex-direction: row;
-    align-items: flex-end;
-    justify-content: flex-end;
-    gap: 0.2rem;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0;
     text-align: right;
 }
 .reader-title-row h2 {
@@ -277,11 +280,13 @@ body.mode-break .reader-title-row {
 }
 body.mode-break .reader-title-row h2 {
     display: block;
+    width: 100%;
     font-size: 1.34rem;
     white-space: normal;
     overflow: visible;
     text-overflow: initial;
     line-height: 1.55;
+    text-align: right;
 }
 .reader-mode-pill {
     display: inline-flex;
