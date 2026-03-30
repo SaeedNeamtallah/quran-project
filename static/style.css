@@ -737,25 +737,25 @@ body.mode-break #reader-focus-control,
 body.mode-break #skip-btn {
     background: rgba(255, 255, 255, 0.92);
     color: var(--text-primary);
-    border: 1px solid rgba(5, 150, 105, 0.12);
+    border: 1px solid rgba(15, 23, 42, 0.16);
 }
 body.theme-dark.mode-break #reader-focus-control,
 body.theme-dark.mode-break #skip-btn {
     background: rgba(18, 24, 36, 0.92);
-    border-color: rgba(65, 199, 187, 0.08);
+    border-color: rgba(0, 0, 0, 0.48);
 }
 body.mode-break #start-btn,
 body.mode-break #pause-btn {
     min-height: 4rem;
     background: rgba(255, 255, 255, 0.96);
     color: var(--text-primary);
-    border: 1px solid rgba(5, 150, 105, 0.12);
+    border: 1px solid rgba(15, 23, 42, 0.16);
     box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
 }
 body.theme-dark.mode-break #start-btn,
 body.theme-dark.mode-break #pause-btn {
     background: rgba(18, 24, 36, 0.96);
-    border-color: rgba(65, 199, 187, 0.08);
+    border-color: rgba(0, 0, 0, 0.52);
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.24);
 }
 body.mode-break #start-btn .btn-icon,
@@ -815,7 +815,7 @@ body.theme-dark.mode-break .reader-font-title {
 .font-step-btn {
     width: 2.35rem;
     height: 2.35rem;
-    border: 1px solid rgba(5, 150, 105, 0.14);
+    border: 1px solid rgba(15, 23, 42, 0.16);
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.9);
     color: var(--accent);
@@ -828,7 +828,7 @@ body.theme-dark.mode-break .reader-font-title {
 }
 body.theme-dark .font-step-btn {
     background: rgba(18, 24, 36, 0.92);
-    border-color: rgba(65, 199, 187, 0.08);
+    border-color: rgba(0, 0, 0, 0.48);
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
 }
 .font-step-btn:hover:not(:disabled) {
@@ -1119,13 +1119,13 @@ body.mode-break .nav-btn {
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.58);
     box-shadow: 0 8px 18px rgba(16, 24, 40, 0.04);
-    border: 1px solid rgba(5, 150, 105, 0.07);
+    border: 1px solid rgba(15, 23, 42, 0.14);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
 body.theme-dark.mode-break .nav-btn {
     background: rgba(15, 21, 32, 0.64);
-    border-color: rgba(65, 199, 187, 0.06);
+    border-color: rgba(0, 0, 0, 0.46);
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 }
 body.mode-break .nav-arrow {
