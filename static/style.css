@@ -989,7 +989,7 @@ body.mode-break .mushaf-layout {
     --ayah-medallion-core: #d7dde6;
     --ayah-medallion-ink: #4b5563;
     --ayah-medallion-ring: #eef2f7;
-    --ayah-medallion-halo: rgba(180, 188, 200, 0.18);
+    --ayah-medallion-halo: rgba(118, 122, 128, 0.18);
     --ayah-medallion-shadow: rgba(15, 23, 42, 0.08);
     position: relative;
     isolation: isolate;
@@ -1014,26 +1014,12 @@ body.mode-break .mushaf-layout {
     box-shadow: 0 6px 16px var(--ayah-medallion-shadow);
     vertical-align: -0.28em;
 }
-.ayah-number::before,
 .ayah-number::after {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: 50%;
     pointer-events: none;
-}
-.ayah-number::before {
-    inset: -0.28rem;
-    background:
-        radial-gradient(circle at 34% 10%, var(--ayah-medallion-ring) 0 0.08rem, transparent 0.1rem),
-        radial-gradient(circle at 50% 4%, var(--ayah-medallion-ring) 0 0.085rem, transparent 0.11rem),
-        radial-gradient(circle at 66% 10%, var(--ayah-medallion-ring) 0 0.08rem, transparent 0.1rem),
-        radial-gradient(circle at 8% 50%, var(--ayah-medallion-ring) 0 0.08rem, transparent 0.1rem),
-        radial-gradient(circle at 92% 50%, var(--ayah-medallion-ring) 0 0.08rem, transparent 0.1rem),
-        radial-gradient(circle at 34% 90%, var(--ayah-medallion-ring) 0 0.08rem, transparent 0.1rem),
-        radial-gradient(circle at 50% 96%, var(--ayah-medallion-ring) 0 0.085rem, transparent 0.11rem),
-        radial-gradient(circle at 66% 90%, var(--ayah-medallion-ring) 0 0.08rem, transparent 0.1rem);
-    opacity: 0.92;
 }
 .ayah-number::after {
     inset: -0.12rem;
