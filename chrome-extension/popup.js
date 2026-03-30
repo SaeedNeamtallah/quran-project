@@ -5,7 +5,7 @@
 // =====================================================
 
 const CIRCUMFERENCE = 2 * Math.PI * 90; // 565.48
-const THEMES = new Set(['mint', 'lavender', 'sky', 'rose', 'sand']);
+const THEMES = new Set(['mint', 'dark', 'lavender', 'sky', 'rose', 'sand']);
 const READING_MODES = new Set(['rub', 'challenge', 'page']);
 const FONT_SIZES = new Set(['1.5rem', '1.9rem', '2.4rem']);
 
@@ -439,7 +439,7 @@ function playAlarm() {
 
 // ===== Theme =====
 function applyTheme() {
-    document.body.classList.remove('theme-mint','theme-lavender','theme-sky','theme-rose','theme-sand');
+    document.body.classList.remove('theme-mint','theme-dark','theme-lavender','theme-sky','theme-rose','theme-sand');
     document.body.classList.add(`theme-${config.theme || 'mint'}`);
     document.documentElement.style.setProperty('--quran-font-size', config.fontSize || '1.9rem');
 }

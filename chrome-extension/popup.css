@@ -78,6 +78,21 @@ body.theme-sand {
     --modal-input-border: rgba(202,138,4,0.2);
     --modal-input-color: #78350f;
 }
+body.theme-dark {
+    --bg-study: radial-gradient(circle at top, #1b2d26 0%, #101915 46%, #090f0d 100%);
+    --bg-break: radial-gradient(circle at top, #1b3028 0%, #0e1814 46%, #060b09 100%);
+    --text-primary: #e6f6ee;
+    --text-secondary: #93d6bd;
+    --surface: rgba(10,18,15,0.9);
+    --surface-border: rgba(74,222,128,0.16);
+    --accent: #34d399; --accent-glow: rgba(52,211,153,0.22);
+    --break-accent: #6ee7b7; --break-accent-glow: rgba(110,231,183,0.2);
+    --modal-bg: #101715; --modal-border: rgba(110,231,183,0.14);
+    --modal-label: #c4f2de;
+    --modal-input-bg: rgba(19,29,25,0.94);
+    --modal-input-border: rgba(110,231,183,0.12);
+    --modal-input-color: #e6f6ee;
+}
 
 /* ===== Reset & Base ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -110,6 +125,9 @@ body.mode-break { background: var(--bg-break); }
     flex-direction: column;
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+body.theme-dark .app-container {
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.56);
 }
 
 /* ===== Top Bar ===== */
@@ -291,6 +309,9 @@ body.mode-break .btn-primary {
     background: rgba(0,0,0,0.03);
     border-radius: 10px;
 }
+body.theme-dark .verses-area {
+    background: rgba(255, 255, 255, 0.03);
+}
 .verses-area::-webkit-scrollbar { width: 4px; }
 .verses-area::-webkit-scrollbar-track { background: transparent; }
 .verses-area::-webkit-scrollbar-thumb { background: var(--surface-border); border-radius: 4px; }
@@ -328,11 +349,25 @@ body.mode-break .btn-primary {
     border-radius: 4px !important;
     padding: 1.5rem 1.25rem !important;
 }
+body.theme-dark .mushaf-page-style {
+    background: rgba(15, 24, 20, 0.98) !important;
+    color: var(--text-primary) !important;
+    border-color: rgba(110, 231, 183, 0.08) !important;
+    box-shadow:
+        inset 0 0 24px rgba(110, 231, 183, 0.03),
+        0 8px 28px rgba(0, 0, 0, 0.3);
+}
 .mushaf-page-style .ayah-text { color: #1a120b !important; }
+body.theme-dark .mushaf-page-style .ayah-text { color: var(--text-primary) !important; }
 .mushaf-page-style .ayah-number {
     border-color: #b45309 !important;
     color: #b45309 !important;
     background: transparent !important;
+}
+body.theme-dark .mushaf-page-style .ayah-number {
+    border-color: var(--break-accent) !important;
+    color: var(--break-accent) !important;
+    background: rgba(16, 185, 129, 0.06) !important;
 }
 
 /* ===== Quran Nav ===== */

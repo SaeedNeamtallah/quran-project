@@ -1,5 +1,5 @@
 // ===== Configuration =====
-const THEMES = new Set(['mint', 'lavender', 'sky', 'rose', 'sand']);
+const THEMES = new Set(['mint', 'dark', 'lavender', 'sky', 'rose', 'sand']);
 const READING_MODES = new Set(['rub', 'challenge', 'page']);
 const FONT_SIZE_STEPS = ['1.2rem', '1.6rem', '2rem', '2.6rem', '3.2rem'];
 const FONT_SIZE_LABELS = {
@@ -284,7 +284,7 @@ function updateStatsDisplay() {
 }
 
 function applyTheme() {
-    body.classList.remove('theme-mint', 'theme-lavender', 'theme-sky', 'theme-rose', 'theme-sand');
+    body.classList.remove('theme-mint', 'theme-dark', 'theme-lavender', 'theme-sky', 'theme-rose', 'theme-sand');
     body.classList.add(`theme-${config.theme || 'mint'}`);
     document.documentElement.style.setProperty('--quran-font-size', config.fontSize || '2rem');
     syncFontSizeControls();
