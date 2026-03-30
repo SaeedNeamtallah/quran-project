@@ -747,20 +747,23 @@ body.theme-dark.mode-break #skip-btn {
 body.mode-break #start-btn,
 body.mode-break #pause-btn {
     min-height: 4rem;
-    background: linear-gradient(135deg, var(--break-accent), var(--accent));
-    color: #fff;
-    border: none;
-    box-shadow: 0 14px 28px rgba(5, 150, 105, 0.2);
+    background: rgba(255, 255, 255, 0.96);
+    color: var(--text-primary);
+    border: 1px solid rgba(5, 150, 105, 0.12);
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
 }
 body.theme-dark.mode-break #start-btn,
 body.theme-dark.mode-break #pause-btn {
-    box-shadow: 0 14px 28px rgba(65, 199, 187, 0.18);
+    background: rgba(18, 24, 36, 0.96);
+    border-color: rgba(65, 199, 187, 0.08);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.24);
 }
 body.mode-break #start-btn .btn-icon,
 body.mode-break #pause-btn .btn-icon {
     font-size: 1.55rem;
-    background: rgba(255, 255, 255, 0.18);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    background: transparent;
+    box-shadow: none;
+    color: var(--accent);
 }
 body.mode-break #reader-focus-control .btn-icon,
 body.mode-break #skip-btn .btn-icon {
