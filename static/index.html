@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20260330-19">
+    <link rel="stylesheet" href="style.css?v=20260330-20">
 </head>
 <body class="mode-study">
 
@@ -53,6 +53,22 @@
                 <span class="reader-sidebar-kicker">جلسة القراءة</span>
                 <strong id="reader-side-status">تهيئة القارئ</strong>
             </div>
+            <div class="reader-header-shell" aria-live="polite">
+                <div class="reader-title-row">
+                    <h2 id="reader-surah-name">جاهز للجلسة</h2>
+                </div>
+                <div class="reader-meta-row">
+                    <span class="reader-meta-chip" id="reader-page-chip">الصفحة --</span>
+                    <span class="reader-meta-chip" id="reader-juz-chip">الجزء --</span>
+                    <span class="reader-meta-chip" id="reader-hizb-chip">الحزب --</span>
+                </div>
+                <div class="reader-progress-row">
+                    <div class="reader-progress-track" aria-hidden="true">
+                        <span id="reader-progress-fill"></span>
+                    </div>
+                    <span id="reader-progress-text">تقدّم القراءة سيظهر هنا</span>
+                </div>
+            </div>
             <div class="timer-summary">
                 <div class="mode-indicator" id="mode-indicator">
                     <span class="mode-dot"></span>
@@ -67,22 +83,8 @@
                 </div>
                 <p class="timer-subtitle" id="mode-subtitle">٣٠ دقيقة عمل عميق</p>
             </div>
-            <div class="reader-header-shell" aria-live="polite">
-                <div class="reader-title-row">
-                    <span class="reader-mode-pill" id="reader-mode-pill">وقت التركيز</span>
-                    <h2 id="reader-surah-name">جاهز للجلسة</h2>
-                </div>
-                <div class="reader-meta-row">
-                    <span class="reader-meta-chip" id="reader-page-chip">الصفحة --</span>
-                    <span class="reader-meta-chip" id="reader-juz-chip">الجزء --</span>
-                    <span class="reader-meta-chip" id="reader-hizb-chip">الحزب --</span>
-                </div>
-                <div class="reader-progress-row">
-                    <div class="reader-progress-track" aria-hidden="true">
-                        <span id="reader-progress-fill"></span>
-                    </div>
-                    <span id="reader-progress-text">تقدّم القراءة سيظهر هنا</span>
-                </div>
+            <div class="reader-mode-row">
+                <span class="reader-mode-pill" id="reader-mode-pill">وقت التركيز</span>
             </div>
             <div class="reader-side-stats">
                 <div class="reader-side-item">
