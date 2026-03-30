@@ -1,7 +1,15 @@
 // ===== Configuration =====
 const THEMES = new Set(['mint', 'lavender', 'sky', 'rose', 'sand']);
 const READING_MODES = new Set(['rub', 'challenge', 'page']);
-const FONT_SIZES = new Set(['1.2rem', '1.6rem', '2rem', '2.6rem', '3.2rem']);
+const FONT_SIZE_STEPS = ['1.2rem', '1.6rem', '2rem', '2.6rem', '3.2rem'];
+const FONT_SIZE_LABELS = {
+    '1.2rem': 'صغير جداً',
+    '1.6rem': 'صغير',
+    '2rem': 'متوسط',
+    '2.6rem': 'كبير',
+    '3.2rem': 'كبير جداً'
+};
+const FONT_SIZES = new Set(FONT_SIZE_STEPS);
 
 function readStoredJson(key) {
     try {
@@ -102,6 +110,9 @@ const readerJuzChip = $('reader-juz-chip');
 const readerHizbChip = $('reader-hizb-chip');
 const readerProgressFill = $('reader-progress-fill');
 const readerProgressText = $('reader-progress-text');
+const readerSideLabel1 = $('reader-side-label-1');
+const readerSideLabel2 = $('reader-side-label-2');
+const readerSideLabel3 = $('reader-side-label-3');
 const readerSideStatus = $('reader-side-status');
 const readerSideMode = $('reader-side-mode');
 const readerSessionGoal = $('reader-session-goal');
@@ -109,6 +120,9 @@ const readerLastPosition = $('reader-last-position');
 const readerFocusBtn = $('reader-focus-btn');
 const readerFocusLabel = $('reader-focus-label');
 const readerFocusControl = $('reader-focus-control');
+const fontIncreaseBtn = $('font-increase-btn');
+const fontDecreaseBtn = $('font-decrease-btn');
+const fontSizeDisplay = $('font-size-display');
 const timerSummary = document.querySelector('.timer-summary');
 const CIRCUMFERENCE = 2 * Math.PI * 90; // 565.48
 let alarmPrimed = false;
@@ -273,6 +287,7 @@ function applyTheme() {
     body.classList.remove('theme-mint', 'theme-lavender', 'theme-sky', 'theme-rose', 'theme-sand');
     body.classList.add(`theme-${config.theme || 'mint'}`);
     document.documentElement.style.setProperty('--quran-font-size', config.fontSize || '2rem');
+    syncFontSizeControls();
 }
 
 function getReadingModeLabel(mode = config.readingMode) {
@@ -292,10 +307,58 @@ function getUniqueSortedNumbers(values) {
     return [...new Set(values.filter(Number.isInteger))].sort((a, b) => a - b);
 }
 
+function formatNumericRange(values) {
+    if (!values.length) return '--';
+    if (values.length === 1) return `${values[0]}`;
+    return `${values[0]}-${values[values.length - 1]}`;
+}
+
+function parseRangeInput(value) {
+    if (Number.isInteger(value)) return [value];
+    const normalized = String(value || '')
+        .split('-')
+        .map(part => Number.parseInt(part.trim(), 10))
+        .filter(Number.isInteger);
+    return normalized.length ? normalized : [];
+}
+
 function formatRangeLabel(label, values) {
     if (!values.length) return `${label} --`;
     if (values.length === 1) return `${label} ${values[0]}`;
     return `${label} ${values[0]}-${values[values.length - 1]}`;
+}
+
+function getFontSizeLabel(value = config.fontSize) {
+    return FONT_SIZE_LABELS[value] || FONT_SIZE_LABELS['2rem'];
+}
+
+function syncFontSizeControls() {
+    if (fontSizeDisplay) {
+        fontSizeDisplay.textContent = getFontSizeLabel(config.fontSize);
+    }
+
+    const currentIndex = FONT_SIZE_STEPS.indexOf(config.fontSize);
+    const safeIndex = currentIndex >= 0 ? currentIndex : FONT_SIZE_STEPS.indexOf('2rem');
+
+    if (fontDecreaseBtn) fontDecreaseBtn.disabled = safeIndex <= 0;
+    if (fontIncreaseBtn) fontIncreaseBtn.disabled = safeIndex >= FONT_SIZE_STEPS.length - 1;
+}
+
+function stepFontSize(direction) {
+    const currentIndex = FONT_SIZE_STEPS.indexOf(config.fontSize);
+    const safeIndex = currentIndex >= 0 ? currentIndex : FONT_SIZE_STEPS.indexOf('2rem');
+    const nextIndex = Math.min(FONT_SIZE_STEPS.length - 1, Math.max(0, safeIndex + direction));
+    const nextSize = FONT_SIZE_STEPS[nextIndex];
+
+    if (nextSize === config.fontSize) {
+        syncFontSizeControls();
+        return;
+    }
+
+    config.fontSize = nextSize;
+    persistConfig();
+    if (fontSizeSelect) fontSizeSelect.value = nextSize;
+    applyTheme();
 }
 
 function describeSessionGoal(mode = config.readingMode) {
@@ -324,7 +387,13 @@ function buildReaderMeta(verses, options = {}) {
         sidebarStatus: 'تهيئة القارئ',
         lastPosition: 'لم يبدأ بعد',
         sessionGoal: describeSessionGoal(mode),
-        contextLabel: 'تجربة قراءة أوضح وأهدأ'
+        contextLabel: 'تجربة قراءة أوضح وأهدأ',
+        sideDetail1Label: 'الحزب',
+        sideDetail1Value: '--',
+        sideDetail2Label: 'ربع الحزب',
+        sideDetail2Value: '--',
+        sideDetail3Label: 'الربع من 240',
+        sideDetail3Value: '--'
     };
 
     if (!safeVerses.length) return fallback;
@@ -334,6 +403,16 @@ function buildReaderMeta(verses, options = {}) {
     const juzs = getUniqueSortedNumbers(safeVerses.map(verse => verse.juz_number));
     const hizbs = getUniqueSortedNumbers(safeVerses.map(verse => verse.hizb_number));
     const rubs = getUniqueSortedNumbers(safeVerses.map(verse => verse.rub_el_hizb_number));
+    const rubSequenceNumbers = parseRangeInput(options.rubSequence);
+    const fullRubNumbers = mode === 'rub'
+        ? (rubSequenceNumbers.length
+            ? rubSequenceNumbers
+            : getUniqueSortedNumbers(
+                safeVerses
+                    .map(verse => Number.parseInt(verse?.rub_number, 10))
+                    .filter(Number.isInteger)
+            ))
+        : [];
 
     let surahTitle = 'القراءة القرآنية';
     if (chapterIds.length === 1) {
@@ -360,7 +439,7 @@ function buildReaderMeta(verses, options = {}) {
         progressPercent = (currentPage / 604) * 100;
         progressText = `الصفحة ${currentPage} من 604`;
     } else {
-        const currentRub = rubs[rubs.length - 1] || options.currentRub || 1;
+        const currentRub = fullRubNumbers[fullRubNumbers.length - 1] || options.currentRub || 1;
         progressPercent = (currentRub / 240) * 100;
         progressText = `الربع ${currentRub} من 240`;
     }
@@ -369,6 +448,21 @@ function buildReaderMeta(verses, options = {}) {
     const juzLabel = formatRangeLabel('الجزء', juzs);
     const hizbLabel = formatRangeLabel('الحزب', hizbs);
     const lastPosition = pages.length ? pageLabel : (rubs.length ? formatRangeLabel('الربع', rubs) : surahTitle);
+    let sideDetail1Label = 'الصفحة';
+    let sideDetail1Value = formatNumericRange(pages);
+    let sideDetail2Label = 'الجزء';
+    let sideDetail2Value = formatNumericRange(juzs);
+    let sideDetail3Label = 'الحزب';
+    let sideDetail3Value = formatNumericRange(hizbs);
+
+    if (mode === 'rub') {
+        sideDetail1Label = 'الحزب';
+        sideDetail1Value = formatNumericRange(hizbs);
+        sideDetail2Label = 'ربع الحزب';
+        sideDetail2Value = formatNumericRange(rubs);
+        sideDetail3Label = 'الربع من 240';
+        sideDetail3Value = formatNumericRange(fullRubNumbers);
+    }
 
     return {
         modeLabel: getReadingModeLabel(mode),
@@ -381,7 +475,13 @@ function buildReaderMeta(verses, options = {}) {
         sidebarStatus: surahTitle,
         lastPosition,
         sessionGoal: describeSessionGoal(mode),
-        contextLabel: 'تجربة قراءة أقرب للمصحف'
+        contextLabel: 'تجربة قراءة أقرب للمصحف',
+        sideDetail1Label,
+        sideDetail1Value,
+        sideDetail2Label,
+        sideDetail2Value,
+        sideDetail3Label,
+        sideDetail3Value
     };
 }
 
@@ -401,10 +501,13 @@ function updateReaderChrome(meta) {
         readerProgressFill.style.width = `${Math.max(0, Math.min(100, details.progressPercent || 0))}%`;
     }
     if (readerProgressText) readerProgressText.textContent = details.progressText;
+    if (readerSideLabel1) readerSideLabel1.textContent = details.sideDetail1Label || 'الحزب';
+    if (readerSideLabel2) readerSideLabel2.textContent = details.sideDetail2Label || 'ربع الحزب';
+    if (readerSideLabel3) readerSideLabel3.textContent = details.sideDetail3Label || 'الربع من 240';
     if (readerSideStatus) readerSideStatus.textContent = details.sidebarStatus;
-    if (readerSideMode) readerSideMode.textContent = details.modeLabel;
-    if (readerSessionGoal) readerSessionGoal.textContent = details.sessionGoal;
-    if (readerLastPosition) readerLastPosition.textContent = details.lastPosition;
+    if (readerSideMode) readerSideMode.textContent = details.sideDetail1Value || '--';
+    if (readerSessionGoal) readerSessionGoal.textContent = details.sideDetail2Value || '--';
+    if (readerLastPosition) readerLastPosition.textContent = details.sideDetail3Value || '--';
 }
 
 function setStudyChrome() {
@@ -731,7 +834,8 @@ async function fetchQuranContent() {
             versesContainer.classList.remove('mushaf-page-style');
             const data = await fetchRubContent(config.rubCount);
             const meta = buildReaderMeta(data.verses, {
-                mode: 'rub'
+                mode: 'rub',
+                rubSequence: data.rub_number
             });
 
             hizbNumber.textContent = `${formatRangeLabel('ربع الحزب', getUniqueSortedNumbers(data.verses.map(verse => verse.rub_el_hizb_number)))} • ${meta.hizbLabel}`;
@@ -754,7 +858,13 @@ async function fetchQuranContent() {
             sidebarStatus: 'خطأ في التحميل',
             lastPosition: 'تحقق من quran_offline.json',
             sessionGoal: describeSessionGoal(config.readingMode),
-            contextLabel: 'تجربة قراءة أقرب للمصحف'
+            contextLabel: 'تجربة قراءة أقرب للمصحف',
+            sideDetail1Label: 'الحزب',
+            sideDetail1Value: '--',
+            sideDetail2Label: 'ربع الحزب',
+            sideDetail2Value: '--',
+            sideDetail3Label: 'الربع من 240',
+            sideDetail3Value: '--'
         });
     }
 }
@@ -939,12 +1049,15 @@ startBtn.addEventListener('click', async () => {
 pauseBtn.addEventListener('click', pauseTimer);
 resetBtn.addEventListener('click', resetTimer);
 skipBtn.addEventListener('click', handleSkipClick);
+fontIncreaseBtn?.addEventListener('click', () => stepFontSize(1));
+fontDecreaseBtn?.addEventListener('click', () => stepFontSize(-1));
 
 // ===== Init =====
 initSettings();
 applyTheme();
 setReaderFocus(false);
 updateStatsDisplay();
+syncFontSizeControls();
 modeSubtitle.textContent = `${config.studyDuration} دقيقة عمل عميق`;
 setStudyChrome();
 updateDisplay();
