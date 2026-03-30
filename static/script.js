@@ -473,17 +473,27 @@ async function primeAlarmAudio() {
     }
 }
 
+function notifyModeSwitch() {
+    if (!('Notification' in window) || Notification.permission !== 'granted') {
+        return;
+    }
+
+    const title = isStudyMode ? '⏱ وقت التركيز!' : '📖 استراحة قرآنية!';
+    const bodyText = isStudyMode ? 'حان وقت العمل العميق' : 'جدد روحك بقراءة القرآن';
+
+    try {
+        new Notification(title, { body: bodyText });
+    } catch (error) {
+        console.warn('Notification failed:', error);
+    }
+}
+
 function switchMode() {
     isStudyMode = !isStudyMode;
     timeRemaining = isStudyMode ? STUDY_TIME : BREAK_TIME;
     setReaderFocus(false);
 
-    // Send browser notification
-    if ('Notification' in window && Notification.permission === 'granted') {
-        const title = isStudyMode ? '⏱ وقت التركيز!' : '📖 استراحة قرآنية!';
-        const body = isStudyMode ? 'حان وقت العمل العميق' : 'جدد روحك بقراءة القرآن';
-        new Notification(title, { body, icon: '📖' });
-    }
+    notifyModeSwitch();
 
     if (isStudyMode) {
         stats.rubs += config.rubCount;
@@ -761,10 +771,6 @@ async function handleSkipClick(event) {
     // Make skip deterministic even if another element overlaps the control.
     if (timerId !== null) {
         pauseTimer();
-    }
-
-    if (isStudyMode) {
-        await primeAlarmAudio();
     }
 
     switchMode();
