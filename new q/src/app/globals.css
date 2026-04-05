@@ -1,0 +1,504 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@font-face {
+  font-family: "UthmanicHafs";
+  src: url("https://verses.quran.foundation/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2") format("woff2");
+  font-display: swap;
+}
+
+:root {
+  --font-sans: "Tajawal", sans-serif;
+  --font-quran: "Amiri", serif;
+  --ink: 7 46 38;
+  --muted: 83 111 106;
+  --line: 187 225 215;
+  --accent: 16 185 129;
+  --surface: 255 255 255;
+  --mist: 232 246 241;
+  --mushaf-line-width-scale: 1.08;
+  --mushaf-line-height-scale: 0.93;
+  --reader-font-size-multiplier: 1;
+  --reader-line-height-multiplier: 1;
+  --reader-line-width-multiplier: 1;
+}
+
+body[data-theme="mint"] {
+  --ink: 7 46 38;
+  --muted: 83 111 106;
+  --line: 187 225 215;
+  --accent: 16 185 129;
+  --surface: 255 255 255;
+  --mist: 232 246 241;
+}
+
+body[data-theme="lavender"] {
+  --ink: 54 23 77;
+  --muted: 110 84 132;
+  --line: 220 207 239;
+  --accent: 139 92 246;
+  --surface: 255 255 255;
+  --mist: 245 239 255;
+}
+
+body[data-theme="sky"] {
+  --ink: 8 47 73;
+  --muted: 81 111 129;
+  --line: 190 223 243;
+  --accent: 14 165 233;
+  --surface: 255 255 255;
+  --mist: 236 249 255;
+}
+
+body[data-theme="rose"] {
+  --ink: 76 5 25;
+  --muted: 120 74 90;
+  --line: 252 207 222;
+  --accent: 225 29 72;
+  --surface: 255 255 255;
+  --mist: 255 241 244;
+}
+
+body[data-theme="sand"] {
+  --ink: 92 50 12;
+  --muted: 122 93 61;
+  --line: 244 223 174;
+  --accent: 217 119 6;
+  --surface: 255 255 255;
+  --mist: 255 249 235;
+}
+
+body[data-theme="dark"] {
+  --ink: 235 244 255;
+  --muted: 159 184 194;
+  --line: 42 60 64;
+  --accent: 65 199 187;
+  --surface: 17 26 27;
+  --mist: 10 17 18;
+}
+
+body[data-theme="black"] {
+  --ink: 244 244 245;
+  --muted: 161 161 170;
+  --line: 39 39 42;
+  --accent: 212 212 216;
+  --surface: 9 9 11;
+  --mist: 20 20 24;
+}
+
+body[data-theme="pitch"] {
+  --ink: 240 240 240;
+  --muted: 110 110 110;
+  --line: 30 30 30;
+  --accent: 16 185 129;
+  --surface: 0 0 0;
+  --mist: 5 5 5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  direction: rtl;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top right, rgba(var(--accent), 0.12), transparent 35%),
+    linear-gradient(180deg, rgba(var(--mist), 0.96), rgba(var(--mist), 1));
+  color: rgb(var(--ink));
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+body[data-theme="dark"],
+body[data-theme="black"],
+body[data-theme="pitch"] {
+  background:
+    radial-gradient(circle at top right, rgba(var(--accent), 0.15), transparent 30%),
+    linear-gradient(180deg, rgba(var(--mist), 0.98), rgba(var(--surface), 1));
+  color-scheme: dark;
+}
+
+body[data-theme="dark"] option,
+body[data-theme="black"] option,
+body[data-theme="pitch"] option {
+  background: rgb(var(--surface));
+  color: rgb(var(--ink));
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(var(--accent), 0.22);
+}
+
+.quran-text {
+  font-family: var(--font-quran);
+  line-height: 2.25;
+}
+
+.glass-panel {
+  background: rgba(var(--surface), 0.82);
+  border: 1px solid rgba(var(--line), 0.8);
+  box-shadow: 0 24px 90px rgba(9, 23, 19, 0.08);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+}
+
+.code_v2-font-size-1,
+.qpc_uthmani_hafs-font-size-1,
+.fallback_qpc_uthmani_hafs-font-size-1 {
+  --font-size-base: 4vw;
+  --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+  --line-height: normal;
+}
+
+.code_v2-font-size-2,
+.qpc_uthmani_hafs-font-size-2,
+.fallback_qpc_uthmani_hafs-font-size-2 {
+  --font-size-base: 5vw;
+  --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+  --line-height: normal;
+}
+
+.code_v2-font-size-3,
+.qpc_uthmani_hafs-font-size-3,
+.fallback_qpc_uthmani_hafs-font-size-3 {
+  --font-size-base: 5.3vw;
+  --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+  --line-height: normal;
+}
+
+.code_v2-font-size-4,
+.qpc_uthmani_hafs-font-size-4,
+.fallback_qpc_uthmani_hafs-font-size-4 {
+  --font-size-base: 8.4vw;
+  --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+  --line-height: normal;
+}
+
+.code_v2-font-size-5,
+.qpc_uthmani_hafs-font-size-5,
+.fallback_qpc_uthmani_hafs-font-size-5 {
+  --font-size-base: 10vw;
+  --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+  --line-height: normal;
+}
+
+.code_v2-font-size-6,
+.qpc_uthmani_hafs-font-size-6,
+.fallback_qpc_uthmani_hafs-font-size-6 {
+  --font-size-base: 11vw;
+  --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+  --line-height: normal;
+}
+
+.code_v2-font-size-7,
+.qpc_uthmani_hafs-font-size-7,
+.fallback_qpc_uthmani_hafs-font-size-7 {
+  --font-size-base: 12vw;
+  --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+  --line-height: normal;
+}
+
+.code_v2-font-size-8,
+.qpc_uthmani_hafs-font-size-8,
+.fallback_qpc_uthmani_hafs-font-size-8 {
+  --font-size-base: 13vw;
+  --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+  --line-height: normal;
+}
+
+.code_v2-font-size-9,
+.qpc_uthmani_hafs-font-size-9,
+.fallback_qpc_uthmani_hafs-font-size-9 {
+  --font-size-base: 14vw;
+  --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+  --line-height: normal;
+}
+
+.code_v2-font-size-10,
+.qpc_uthmani_hafs-font-size-10,
+.fallback_qpc_uthmani_hafs-font-size-10 {
+  --font-size-base: 15vw;
+  --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+  --line-height: normal;
+}
+
+@media (min-width: 768px) {
+  .code_v2-font-size-1 {
+    --font-size-base: 2.9vh;
+    --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+    --line-height-base: calc(6.1vh * var(--mushaf-line-height-scale));
+    --line-height: calc(var(--line-height-base) * var(--reader-line-height-multiplier));
+  }
+
+  .code_v2-font-size-2 {
+    --font-size-base: 3vh;
+    --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+    --line-height-base: calc(6.1vh * var(--mushaf-line-height-scale));
+    --line-height: calc(var(--line-height-base) * var(--reader-line-height-multiplier));
+  }
+
+  .code_v2-font-size-3 {
+    --font-size-base: 3.2vh;
+    --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+    --line-height-base: calc(6.1vh * var(--mushaf-line-height-scale));
+    --line-height: calc(var(--line-height-base) * var(--reader-line-height-multiplier));
+  }
+
+  .code_v2-font-size-4 {
+    --font-size-base: 3.5vh;
+    --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+    --line-height-base: calc(6.1vh * var(--mushaf-line-height-scale));
+    --line-height: calc(var(--line-height-base) * var(--reader-line-height-multiplier));
+  }
+
+  .code_v2-font-size-5 {
+    --font-size-base: 3.7vh;
+    --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+    --line-height-base: calc(6.1vh * var(--mushaf-line-height-scale));
+    --line-height: calc(var(--line-height-base) * var(--reader-line-height-multiplier));
+  }
+
+  .code_v2-font-size-6 {
+    --font-size-base: 5.16vh;
+    --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+    --line-height-base: calc(9.28vh * var(--mushaf-line-height-scale));
+    --line-height: calc(var(--line-height-base) * var(--reader-line-height-multiplier));
+  }
+
+  .code_v2-font-size-7 {
+    --font-size-base: 6.62vh;
+    --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+    --line-height-base: calc(12.46vh * var(--mushaf-line-height-scale));
+    --line-height: calc(var(--line-height-base) * var(--reader-line-height-multiplier));
+  }
+
+  .code_v2-font-size-8 {
+    --font-size-base: 8.08vh;
+    --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+    --line-height-base: calc(15.64vh * var(--mushaf-line-height-scale));
+    --line-height: calc(var(--line-height-base) * var(--reader-line-height-multiplier));
+  }
+
+  .code_v2-font-size-9 {
+    --font-size-base: 9.54vh;
+    --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+    --line-height-base: calc(18.82vh * var(--mushaf-line-height-scale));
+    --line-height: calc(var(--line-height-base) * var(--reader-line-height-multiplier));
+  }
+
+  .code_v2-font-size-10 {
+    --font-size-base: 11vh;
+    --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+    --line-height-base: calc(22vh * var(--mushaf-line-height-scale));
+    --line-height: calc(var(--line-height-base) * var(--reader-line-height-multiplier));
+  }
+
+  .qpc_uthmani_hafs-font-size-1,
+  .fallback_qpc_uthmani_hafs-font-size-1 {
+    --font-size-base: 3.19vh;
+    --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+    --line-height-base: calc(6vh * var(--mushaf-line-height-scale));
+    --line-height: calc(var(--line-height-base) * var(--reader-line-height-multiplier));
+  }
+
+  .qpc_uthmani_hafs-font-size-2,
+  .fallback_qpc_uthmani_hafs-font-size-2 {
+    --font-size-base: 3.2vh;
+    --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+    --line-height-base: calc(6vh * var(--mushaf-line-height-scale));
+    --line-height: calc(var(--line-height-base) * var(--reader-line-height-multiplier));
+  }
+
+  .qpc_uthmani_hafs-font-size-3,
+  .fallback_qpc_uthmani_hafs-font-size-3 {
+    --font-size-base: 3.39vh;
+    --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+    --line-height-base: calc(6.1vh * var(--mushaf-line-height-scale));
+    --line-height: calc(var(--line-height-base) * var(--reader-line-height-multiplier));
+  }
+
+  .qpc_uthmani_hafs-font-size-4,
+  .fallback_qpc_uthmani_hafs-font-size-4 {
+    --font-size-base: 3.6vh;
+    --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+    --line-height-base: calc(6vh * var(--mushaf-line-height-scale));
+    --line-height: calc(var(--line-height-base) * var(--reader-line-height-multiplier));
+  }
+
+  .qpc_uthmani_hafs-font-size-5,
+  .fallback_qpc_uthmani_hafs-font-size-5 {
+    --font-size-base: 4.4vh;
+    --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+    --line-height-base: calc(5.68vh * var(--mushaf-line-height-scale));
+    --line-height: calc(var(--line-height-base) * var(--reader-line-height-multiplier));
+  }
+
+  .qpc_uthmani_hafs-font-size-6,
+  .fallback_qpc_uthmani_hafs-font-size-6 {
+    --font-size-base: 5.55vh;
+    --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+    --line-height-base: calc(8.14vh * var(--mushaf-line-height-scale));
+    --line-height: calc(var(--line-height-base) * var(--reader-line-height-multiplier));
+  }
+
+  .qpc_uthmani_hafs-font-size-7,
+  .fallback_qpc_uthmani_hafs-font-size-7 {
+    --font-size-base: 6.7vh;
+    --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+    --line-height-base: calc(10.61vh * var(--mushaf-line-height-scale));
+    --line-height: calc(var(--line-height-base) * var(--reader-line-height-multiplier));
+  }
+
+  .qpc_uthmani_hafs-font-size-8,
+  .fallback_qpc_uthmani_hafs-font-size-8 {
+    --font-size-base: 7.85vh;
+    --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+    --line-height-base: calc(13.07vh * var(--mushaf-line-height-scale));
+    --line-height: calc(var(--line-height-base) * var(--reader-line-height-multiplier));
+  }
+
+  .qpc_uthmani_hafs-font-size-9,
+  .fallback_qpc_uthmani_hafs-font-size-9 {
+    --font-size-base: 9vh;
+    --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+    --line-height-base: calc(15.54vh * var(--mushaf-line-height-scale));
+    --line-height: calc(var(--line-height-base) * var(--reader-line-height-multiplier));
+  }
+
+  .qpc_uthmani_hafs-font-size-10,
+  .fallback_qpc_uthmani_hafs-font-size-10 {
+    --font-size-base: 10.15vh;
+    --font-size: calc(var(--font-size-base) * var(--reader-font-size-multiplier));
+    --line-height-base: calc(18vh * var(--mushaf-line-height-scale));
+    --line-height: calc(var(--line-height-base) * var(--reader-line-height-multiplier));
+  }
+
+  .code_v2-line-width-1 {
+    --line-width-base: calc(52vh * var(--mushaf-line-width-scale));
+    --line-width: calc(var(--line-width-base) * var(--reader-line-width-multiplier));
+  }
+
+  .code_v2-line-width-2 {
+    --line-width-base: calc(54vh * var(--mushaf-line-width-scale));
+    --line-width: calc(var(--line-width-base) * var(--reader-line-width-multiplier));
+  }
+
+  .code_v2-line-width-3 {
+    --line-width-base: calc(56vh * var(--mushaf-line-width-scale));
+    --line-width: calc(var(--line-width-base) * var(--reader-line-width-multiplier));
+  }
+
+  .code_v2-line-width-4 {
+    --line-width-base: calc(61vh * var(--mushaf-line-width-scale));
+    --line-width: calc(var(--line-width-base) * var(--reader-line-width-multiplier));
+  }
+
+  .code_v2-line-width-5 {
+    --line-width-base: calc(64.5vh * var(--mushaf-line-width-scale));
+    --line-width: calc(var(--line-width-base) * var(--reader-line-width-multiplier));
+  }
+
+  .code_v2-line-width-6 {
+    --line-width-base: calc(90.4vh * var(--mushaf-line-width-scale));
+    --line-width: calc(var(--line-width-base) * var(--reader-line-width-multiplier));
+  }
+
+  .code_v2-line-width-7 {
+    --line-width-base: calc(116.3vh * var(--mushaf-line-width-scale));
+    --line-width: calc(var(--line-width-base) * var(--reader-line-width-multiplier));
+  }
+
+  .code_v2-line-width-8 {
+    --line-width-base: calc(142.2vh * var(--mushaf-line-width-scale));
+    --line-width: calc(var(--line-width-base) * var(--reader-line-width-multiplier));
+  }
+
+  .code_v2-line-width-9 {
+    --line-width-base: calc(168.1vh * var(--mushaf-line-width-scale));
+    --line-width: calc(var(--line-width-base) * var(--reader-line-width-multiplier));
+  }
+
+  .code_v2-line-width-10 {
+    --line-width-base: calc(194vh * var(--mushaf-line-width-scale));
+    --line-width: calc(var(--line-width-base) * var(--reader-line-width-multiplier));
+  }
+
+  .qpc_uthmani_hafs-line-width-1,
+  .fallback_qpc_uthmani_hafs-line-width-1 {
+    --line-width-base: calc(55vh * var(--mushaf-line-width-scale));
+    --line-width: calc(var(--line-width-base) * var(--reader-line-width-multiplier));
+  }
+
+  .qpc_uthmani_hafs-line-width-2,
+  .fallback_qpc_uthmani_hafs-line-width-2 {
+    --line-width-base: calc(59vh * var(--mushaf-line-width-scale));
+    --line-width: calc(var(--line-width-base) * var(--reader-line-width-multiplier));
+  }
+
+  .qpc_uthmani_hafs-line-width-3,
+  .fallback_qpc_uthmani_hafs-line-width-3 {
+    --line-width-base: calc(63.8vh * var(--mushaf-line-width-scale));
+    --line-width: calc(var(--line-width-base) * var(--reader-line-width-multiplier));
+  }
+
+  .qpc_uthmani_hafs-line-width-4,
+  .fallback_qpc_uthmani_hafs-line-width-4 {
+    --line-width-base: calc(65vh * var(--mushaf-line-width-scale));
+    --line-width: calc(var(--line-width-base) * var(--reader-line-width-multiplier));
+  }
+
+  .qpc_uthmani_hafs-line-width-5,
+  .fallback_qpc_uthmani_hafs-line-width-5 {
+    --line-width-base: calc(66vh * var(--mushaf-line-width-scale));
+    --line-width: calc(var(--line-width-base) * var(--reader-line-width-multiplier));
+  }
+
+  .qpc_uthmani_hafs-line-width-6,
+  .fallback_qpc_uthmani_hafs-line-width-6 {
+    --line-width-base: calc(102.6vh * var(--mushaf-line-width-scale));
+    --line-width: calc(var(--line-width-base) * var(--reader-line-width-multiplier));
+  }
+
+  .qpc_uthmani_hafs-line-width-7,
+  .fallback_qpc_uthmani_hafs-line-width-7 {
+    --line-width-base: calc(124.3vh * var(--mushaf-line-width-scale));
+    --line-width: calc(var(--line-width-base) * var(--reader-line-width-multiplier));
+  }
+
+  .qpc_uthmani_hafs-line-width-8,
+  .fallback_qpc_uthmani_hafs-line-width-8 {
+    --line-width-base: calc(146.2vh * var(--mushaf-line-width-scale));
+    --line-width: calc(var(--line-width-base) * var(--reader-line-width-multiplier));
+  }
+
+  .qpc_uthmani_hafs-line-width-9,
+  .fallback_qpc_uthmani_hafs-line-width-9 {
+    --line-width-base: calc(168vh * var(--mushaf-line-width-scale));
+    --line-width: calc(var(--line-width-base) * var(--reader-line-width-multiplier));
+  }
+
+  .qpc_uthmani_hafs-line-width-10,
+  .fallback_qpc_uthmani_hafs-line-width-10 {
+    --line-width-base: calc(190vh * var(--mushaf-line-width-scale));
+    --line-width: calc(var(--line-width-base) * var(--reader-line-width-multiplier));
+  }
+}

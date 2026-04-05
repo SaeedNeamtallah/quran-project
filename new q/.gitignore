@@ -1,0 +1,11 @@
+.next/
+.next-dev/
+.next-prod/
+node_modules/
+coverage/
+playwright-report/
+test-results/
+.turbo/
+.env.local
+.env.*.local
+dist/

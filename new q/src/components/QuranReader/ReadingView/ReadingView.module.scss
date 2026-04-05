@@ -1,0 +1,69 @@
+.viewport {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: visible;
+  overscroll-behavior-inline: contain;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgb(var(--accent) / 0.2);
+    border-radius: 999px;
+
+    &:hover {
+      background: rgb(var(--accent) / 0.35);
+    }
+  }
+}
+
+.stage {
+  display: flex;
+  width: max-content;
+  min-width: 100%;
+  justify-content: center;
+  background-color: rgb(var(--surface));
+  color: rgb(var(--ink));
+
+  // Force all qcf/word elements to inherit the theme's ink color
+  :global {
+    .word, [class*="qcf-v2-page-"], .quran-text {
+      color: rgb(var(--ink)) !important;
+    }
+  }
+}
+
+.stack {
+  display: inline-grid;
+  justify-items: center;
+}
+
+.stackWithGap {
+  gap: 0;
+}
+
+.spread {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--reader-spread-gap, clamp(2rem, 4vw, 4.5rem));
+}
+
+.slot {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .slot {
+    inline-size: var(--line-width);
+  }
+}

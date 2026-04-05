@@ -1,0 +1,47 @@
+.verseText {
+  display: inline-flex;
+  align-items: baseline;
+  line-height: var(--line-height);
+}
+
+.verseTextContainer {
+  text-align: center;
+  display: block;
+  direction: rtl;
+}
+
+.readingModeContainer {
+  display: inline-block;
+  max-inline-size: 100%;
+  margin-inline: auto;
+}
+
+.largeQuranTextLayoutContainer {
+  display: inline;
+}
+
+.largeQuranTextLayout {
+  display: inline;
+}
+
+.verseTextWrap {
+  flex-wrap: wrap;
+}
+
+.highlighted {
+  background-color: rgba(16, 185, 129, 0.08);
+}
+
+.tafsirOrTranslationMode {
+  font-size: calc(1.2 * var(--font-size));
+}
+
+@media (min-width: 768px) {
+  .largeQuranTextLayoutContainer {
+    display: block;
+  }
+
+  .largeQuranTextLayout {
+    display: flex;
+  }
+}
